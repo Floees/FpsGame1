@@ -10,10 +10,13 @@ public class BulletGun : MonoBehaviour
     public List<GameObject> Bullets;
 
     public bool TestShoot;
+    public float FireCooldown = 0.2f;
+    private float NextFireTime;
 
     private void Awake() 
     {
         PopulateBullets();
+        gameObject.SetActive(false);
     }
 
     void PopulateBullets() 
@@ -37,9 +40,10 @@ public class BulletGun : MonoBehaviour
     }
     public void Shoot() 
     {
-        //var t = Instantiate(BulletPrefab, BulletPoint.position, Quaternion.identity);
-        //t.GetComponent<Bullet>().Aim();
-        //Debug.Log($"BANG");
+        if (!isActiveAndEnabled || Time.time < NextFireTime)
+            return;
+
+        else NextFireTime = Time.time + FireCooldown;
 
         foreach (GameObject Bullet in Bullets) 
         {

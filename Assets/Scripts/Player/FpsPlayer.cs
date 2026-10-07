@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,8 +6,15 @@ public class FpsPlayer : MonoBehaviour
 {
     public float MouseSens, pitch, yaw, MoveSpeed;
     public Transform View;
-    public Weapon CurrentWeapon = Weapon.BulletGun;
+    public Weapon CurrentWeapon = Weapon.None; //overwritten by inspector
     public BulletGun BG;
+    public float JumpHeight = 1.5f;
+    public LaserGun LG;
+    public Rigidbody RB;
+    public bool TouchingGround;
+    public float GroundedHeight;
+    public GameObject InventoryPanel;
+    public bool LaserGunPickedUp, BulletGunPickedUp;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,9 +24,17 @@ public class FpsPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Controls();
+    }
+
+    void Controls() 
+    {
         Look();
         Shoot();
         Move2();
+        Jump();
+        ToggleInventory();
+        ToggleWeapon();
     }
 
 
@@ -35,13 +51,50 @@ public class FpsPlayer : MonoBehaviour
         if(Input.GetButton("Fire1")) 
         {
             if (CurrentWeapon == Weapon.BulletGun)
-            {
                 BG.Shoot();
-            }
+            if (CurrentWeapon == Weapon.LaserGun)
+                LG.Fire();
             else
-            {
+                return;
+        }
+    }
 
+    void ToggleWeapon() 
+    {
+        if (Input.GetKeyDown(KeyCode.Q)) 
+        {
+            if(!BulletGunPickedUp && !LaserGunPickedUp)
+                return;
+
+            if(BulletGunPickedUp && LaserGunPickedUp)
+            {
+                if(CurrentWeapon == Weapon.BulletGun)
+                {
+                    CurrentWeapon = Weapon.LaserGun;
+                    return;
+                }
+                if(CurrentWeapon == Weapon.LaserGun)
+                {
+                    CurrentWeapon = Weapon.BulletGun;
+                    return;
+                }
             }
+            EquipWeapon();
+
+        }
+    }
+
+    public void EquipWeapon()
+    {
+        if(CurrentWeapon == Weapon.BulletGun)
+        {
+            BG.gameObject.SetActive(true);
+            LG.gameObject.SetActive(false);
+        }
+        if (CurrentWeapon == Weapon.LaserGun)
+        {
+            LG.gameObject.SetActive(true);
+            BG.gameObject.SetActive(false);
         }
     }
 
@@ -69,9 +122,62 @@ public class FpsPlayer : MonoBehaviour
         transform.position += direction * MoveSpeed * Time.deltaTime;
 
     }
+
+    void Jump()
+    {
+        if (!Input.GetKeyDown(KeyCode.Space))
+            return;
+
+        if (RB.linearVelocity.y > 0.1f)
+            return;
+
+        if (!RB.SweepTest(Vector3.down, out RaycastHit hit, GroundedHeight, QueryTriggerInteraction.Ignore)
+            || hit.normal.y < 0.65f)
+        {
+            Debug.Log("NO GROUND");
+            return;
+        }
+
+        Vector3 velocity = RB.linearVelocity;
+        velocity.y = Mathf.Sqrt(2f * Mathf.Abs(Physics.gravity.y) * JumpHeight);
+        RB.linearVelocity = velocity;
+    }
+
+    bool CanIJump() 
+    {
+        if (!Input.GetKeyDown(KeyCode.Space))
+            return false;
+
+        if (RB.linearVelocity.y > 0.1f)
+            return false;
+
+        if (!TouchingGround)
+            return false;
+
+        else
+            return true;
+    }
+    void ToggleInventory() 
+    {
+        if(Input.GetKeyDown(KeyCode.I))
+            InventoryPanel.SetActive(!InventoryPanel.activeInHierarchy);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Ground")
+            TouchingGround = true;
+
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.transform.tag == "Ground")
+            TouchingGround = false;
+    }
 }
 
 public enum Weapon 
 {
-    BulletGun, LaserGun
+    BulletGun, LaserGun, None
 }
