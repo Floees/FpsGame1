@@ -6,7 +6,6 @@ public class BulletGun : MonoBehaviour
 {
     public Transform BulletPoint;
     public GameObject BulletPrefab;
-
     public List<GameObject> Bullets;
 
     public bool TestShoot;
@@ -51,7 +50,6 @@ public class BulletGun : MonoBehaviour
             {
                 Bullet.transform.position = BulletPoint.position;
                 Bullet.SetActive(true);
-                Debug.Log("BANGBANG");
                 break;
             }
         }

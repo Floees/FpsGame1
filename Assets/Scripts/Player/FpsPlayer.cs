@@ -128,53 +128,33 @@ public class FpsPlayer : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
 
-        if (RB.linearVelocity.y > 0.1f)
+        if (RB.linearVelocity.y > 0.1f || RB.linearVelocity.y < -0.1f)
             return;
-
-        if (!RB.SweepTest(Vector3.down, out RaycastHit hit, GroundedHeight, QueryTriggerInteraction.Ignore)
-            || hit.normal.y < 0.65f)
-        {
-            Debug.Log("NO GROUND");
-            return;
-        }
-
+        
         Vector3 velocity = RB.linearVelocity;
         velocity.y = Mathf.Sqrt(2f * Mathf.Abs(Physics.gravity.y) * JumpHeight);
         RB.linearVelocity = velocity;
+        
     }
 
-    bool CanIJump() 
-    {
-        if (!Input.GetKeyDown(KeyCode.Space))
-            return false;
-
-        if (RB.linearVelocity.y > 0.1f)
-            return false;
-
-        if (!TouchingGround)
-            return false;
-
-        else
-            return true;
-    }
     void ToggleInventory() 
     {
         if(Input.GetKeyDown(KeyCode.I))
             InventoryPanel.SetActive(!InventoryPanel.activeInHierarchy);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.tag == "Ground")
-            TouchingGround = true;
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.transform.tag == "Ground")
+    //        TouchingGround = true;
 
-    }
+    //}
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if(collision.transform.tag == "Ground")
-            TouchingGround = false;
-    }
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if(collision.transform.tag == "Ground")
+    //        TouchingGround = false;
+    //}
 }
 
 public enum Weapon 

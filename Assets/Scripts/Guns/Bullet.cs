@@ -19,18 +19,22 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.transform.CompareTag("Player"))
+        if (!collision.transform.CompareTag("Player") || !collision.transform.CompareTag("Bullet"))
         {
-            Debug.Log("HIT");
+            Debug.Log($"BULLETONCOLLISION {collision.transform.name}");
             gameObject.SetActive(false);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.transform.CompareTag("Player"))
+        //if (!other.transform.CompareTag("Player") || !other.transform.CompareTag("Bullet"))
+        if(other.CompareTag("Player") || other.CompareTag("Bullet"))
         {
-            Debug.Log("HIT");
+            return;
+        }
+        if(!other.CompareTag("Player") || !other.CompareTag("Bullet"))
+        {
             gameObject.SetActive(false);
         }
     }

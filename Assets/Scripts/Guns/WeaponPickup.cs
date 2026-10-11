@@ -1,16 +1,23 @@
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class WeaponPickup : MonoBehaviour
 {
     public Weapon WhatWeaponAmI;
 
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player")
+
+        if (other.CompareTag("Player"))
         {
             FpsPlayer p = other.GetComponent<FpsPlayer>();
-            if (p != null)
+
+            if (p == null)
+            {
                 return;
+            }
 
             if (WhatWeaponAmI == Weapon.BulletGun)
             {
@@ -26,6 +33,7 @@ public class WeaponPickup : MonoBehaviour
                 p.EquipWeapon();
                 return;
             }
+
             Destroy(gameObject);
         }
     }
