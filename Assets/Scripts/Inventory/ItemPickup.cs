@@ -18,11 +18,11 @@ public class ItemPickup : MonoBehaviour
 
         Collected = true;
 
-        if(!inv.AddItem(item, amount)) 
-        {
-            Collected = false;
-            return;
-        }
+        //if(!inv.AddItem(item, amount)) 
+        //{
+        //    Collected = false;
+        //    return;
+        //}
 
         Destroy(gameObject);
 

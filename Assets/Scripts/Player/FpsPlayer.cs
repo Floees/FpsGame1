@@ -31,9 +31,9 @@ public class FpsPlayer : MonoBehaviour
     {
         Look();
         Shoot();
-        Move2();
-        Jump();
-        ToggleInventory();
+        //Move2();
+        //Jump();
+       //ToggleInventory();
         ToggleWeapon();
     }
 

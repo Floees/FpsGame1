@@ -17,14 +17,6 @@ public class Bullet : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!collision.transform.CompareTag("Player") || !collision.transform.CompareTag("Bullet"))
-        {
-            Debug.Log($"BULLETONCOLLISION {collision.transform.name}");
-            gameObject.SetActive(false);
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -33,8 +25,23 @@ public class Bullet : MonoBehaviour
         {
             return;
         }
+
         if(!other.CompareTag("Player") || !other.CompareTag("Bullet"))
         {
+            gameObject.SetActive(false);
+        }
+
+        if (other.CompareTag("Rubble") || other.CompareTag("Enemy"))
+        {
+            other.attachedRigidbody.AddExplosionForce(450f, this.transform.position, 50f);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.transform.CompareTag("Player") || !collision.transform.CompareTag("Bullet"))
+        {
+            Debug.Log($"BULLETONCOLLISION {collision.transform.name}");
             gameObject.SetActive(false);
         }
     }

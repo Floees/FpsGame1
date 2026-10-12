@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Pickup
   - Wall
+  - Rubble
+  - Enemy
   layers:
   - Default
   - TransparentFX
