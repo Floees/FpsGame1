@@ -16,6 +16,7 @@ public class FpsPlayer : MonoBehaviour
     public GameObject InventoryPanel;
     public bool LaserGunPickedUp, BulletGunPickedUp;
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

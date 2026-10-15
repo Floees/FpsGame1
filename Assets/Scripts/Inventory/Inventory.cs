@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     int selected = -1;
     public int Count => Items.Count;
     public int Selected => selected;
-    public ItemData Active => selected <= 0 ? Items[selected].Item : null; // om inte noll hämta item, eller null
+    public ItemData Active => selected >= 0  && selected < Items.Count ? Items[selected].Item : null; // om inte noll hämta item, eller null
     public ItemData Get(int index) => Items[index].Item;
     public int GetAmount(int index) => Items[index].Amount;
     public event Action Changed;

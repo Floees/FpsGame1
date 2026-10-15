@@ -11,7 +11,7 @@ public class HealthUI : MonoBehaviour
     void Render(int current, int max) 
     {
         Label.text = $"Life: {current}/{max}";
-        SliderBar.SetValueWithoutNotify((float)current / max);
+        SliderBar.SetValueWithoutNotify(current);
 
     }
 

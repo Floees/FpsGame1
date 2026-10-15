@@ -34,6 +34,10 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Rubble") || other.CompareTag("Enemy"))
         {
             other.attachedRigidbody.AddExplosionForce(450f, this.transform.position, 50f);
+            if(other.CompareTag("Enemy"))
+            {
+                //dmg if enough delete proly
+            }
         }
     }
 

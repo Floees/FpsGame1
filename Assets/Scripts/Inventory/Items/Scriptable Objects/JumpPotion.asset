@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f5c3bb2b0a9544c9c7fdd5bf36bc19, type: 3}
+  m_Name: JumpPotion
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  DisplayName: Spicyyy
+  Icon: {fileID: 21300000, guid: c732f78ec56692d4c91bb92594040fdb, type: 2}
+  Kind: 2
+  HealAmount: 0
+  Multiplier: 2
+  Duration: 10

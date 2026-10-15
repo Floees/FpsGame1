@@ -36,7 +36,9 @@ public class PlayerInteractor : MonoBehaviour
         if(Prompt.text != text)
             Prompt.text = text;
 
-        Prompt.enabled = text.Length > 0;
+        bool value = text.Length > 0;
+        Prompt.gameObject.SetActive(value);
+
     }
 
     void TryPickup() 

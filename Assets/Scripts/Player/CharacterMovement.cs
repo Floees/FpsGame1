@@ -27,12 +27,12 @@ public class CharacterMovement : MonoBehaviour
         float x = (k.dKey.isPressed ? 1 : 0 ) - (k.aKey.isPressed ? 1 : 0 );
         float z = (k.wKey.isPressed ? 1 : 0 ) - (k.sKey.isPressed ? 1 : 0 );
         Vector3 move = transform.right * x + transform.forward * z;
-        move = Vector3.ClampMagnitude(move, 1f) * Speed/* * Effects.speedmultiplier*/;
+        move = Vector3.ClampMagnitude(move, 1f) * Speed * Effects.SpeedMultiplier;
 
         if (CC.isGrounded && ySpeed < 0f)
             ySpeed = -2f;
         if (CC.isGrounded && k.spaceKey.wasPressedThisFrame)
-            ySpeed = JumpSpeed /* * Effects.JumpMultiplier */;
+            ySpeed = JumpSpeed * Effects.JumpMultiplier;
 
         ySpeed += Gravity * Time.deltaTime;
         move.y = ySpeed;

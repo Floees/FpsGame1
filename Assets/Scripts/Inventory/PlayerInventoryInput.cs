@@ -6,6 +6,12 @@ public class PlayerInventoryInput : MonoBehaviour
     public Inventory PlayerInventory;
     public PotionEffects Effects;
 
+    private void Update()
+    {
+        SelectItem();
+        UseItem();
+    }
+
     public void SelectItem() 
     {
         if (Keyboard.current == null)

@@ -7,11 +7,11 @@ public class InventoryUI : MonoBehaviour
     public Inventory PlayerInventory;
     public InventorySlot[] slots;
 
-    void Awake()
-    {
-        for (int i = 0; i < slots.Length; i++)
-            slots[i].Bind(i, PlayerInventory);
-    }
+    //void Awake()
+    //{
+    //    for (int i = 0; i < slots.Length; i++)
+    //        slots[i].Bind(i, PlayerInventory);
+    //}
 
     private void OnEnable()
     {
