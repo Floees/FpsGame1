@@ -2288,6 +2288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuController
   SettingsPanel: {fileID: 2125796942}
+  State: 0
 --- !u!4 &1931240574
 Transform:
   m_ObjectHideFlags: 0

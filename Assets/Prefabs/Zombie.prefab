@@ -668,6 +668,7 @@ GameObject:
   - component: {fileID: 3711406387993735396}
   - component: {fileID: 1306009465256910542}
   - component: {fileID: 6611919605305367085}
+  - component: {fileID: 5225395463154517260}
   - component: {fileID: 1648015254344790614}
   m_Layer: 0
   m_Name: Zombie
@@ -738,6 +739,33 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5225395463154517260
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7812168885049075658}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 32
+  m_CollisionDetection: 0
 --- !u!114 &1648015254344790614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -752,6 +780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ZombieScript
   Player: {fileID: 0}
   MoveSpeed: 4
+  GM: {fileID: 0}
 --- !u!1 &8000225099500997278
 GameObject:
   m_ObjectHideFlags: 0
